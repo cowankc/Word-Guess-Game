@@ -39,14 +39,9 @@ document.onkeyup = function () {
     blanks = "";
 }
 
-// document.onkeyup = function() {
-//     let userGuess = String.fromCharCode(event.keyCode).toLocaleLowerCase();
-//     let storedLetter = document.createElement("h4");
-//     storedLetter.innerHTML = userGuess;
-//     document.getElementById("usedletter").appendChild(storedLetter)
-//     userGuess = userChoice;
-// }
+
 document.getElementById("guesses").innerHTML = counter;
+
 window.onload = createBlanks ()
 
 

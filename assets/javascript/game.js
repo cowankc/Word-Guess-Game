@@ -8,10 +8,10 @@ let correctLetters = [wordlength];
 let wordLetter = compGuess.split("");
 let counter = 10;
 let winCount = 0;
-let win = wordlength;
+let letterNum = wordlength;
 let blanks = [];
 let userChoice = "";
-
+let keysUsed = []
 
 
 let createBlanks = function() {
@@ -22,32 +22,24 @@ let createBlanks = function() {
     document.getElementById("chosenName").innerHTML = blanks;
 }
 
+window.onload = createBlanks ()
+
 document.onkeyup = function typedKey() {
     let userGuess = String.fromCharCode(event.keyCode).toLocaleLowerCase();
     let storedLetter = document.createElement("h4");
     storedLetter.innerHTML = userGuess;
     document.getElementById("usedletter").appendChild(storedLetter)
+    keysUsed.push(userGuess)
     blanks = "";
     for (let i=0; i< correctLetters.length; i++) {
         if (userGuess === wordLetter[i]) {
             correctLetters[i] = userGuess;
-            win--;
+            letterNum--;
         }
-        else if (userGuess === document.querySelectorAll("h4")) {
-            
-        }
-        else if (document.querySelectorAll("h4").length < 12) {
-            counter - 1;
-            document.getElementById("guesses").innerHTML = counter;
-        }
+        
         blanks = blanks + correctLetters[i] + " ";
     }
     document.getElementById("chosenName").innerHTML = blanks;
     blanks = "";
 }
-
-
-
-window.onload = createBlanks ()
-
 

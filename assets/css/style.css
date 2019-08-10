@@ -21,7 +21,7 @@ section {
 #leftside {
     float: left;
     height: 100%;
-    width: 50%;
+    width: 49%;
     border-right: 2px solid black;
 }
 #rightside {
@@ -29,6 +29,11 @@ section {
     height: 100%;
     width: 50%;
 }
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
 #picture {
     width: 300px;
     height: 200px;

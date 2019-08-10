@@ -1,6 +1,6 @@
 
 
-const playerList = ["ray allen", "tim duncan", "lebron james", "michael jordan", "larry bird", "magic johnson", "wilt chamberlain", "dikembe mutombo", "kobe bryant", "kareem abdul-jabbar", "charles barkley", "jerry west", "dirk nowitzki", "shaq", "dr.j", "karl malone", "steph curry", "yao ming", "david robinson", "bill russell"]
+const playerList = ["ray allen", "tim duncan", "lebron james", "michael jordan", "larry bird", "magic johnson", "wilt chamberlain", "dikembe mutombo", "kobe bryant", "Patrick Ewing", "charles barkley", "jerry west", "dirk nowitzki", "shaq", "dr.j", "karl malone", "steph curry", "yao ming", "david robinson", "bill russell"]
 
 let compGuess = playerList[Math.floor(Math.random() * playerList.length)];
 let wordlength = compGuess.length;
@@ -22,7 +22,7 @@ let createBlanks = function() {
     document.getElementById("chosenName").innerHTML = blanks;
 }
 
-document.onkeyup = function () {
+document.onkeyup = function typedKey() {
     let userGuess = String.fromCharCode(event.keyCode).toLocaleLowerCase();
     let storedLetter = document.createElement("h4");
     storedLetter.innerHTML = userGuess;
@@ -33,6 +33,13 @@ document.onkeyup = function () {
             correctLetters[i] = userGuess;
             win--;
         }
+        else if (userGuess === document.querySelectorAll("h4")) {
+            
+        }
+        else if (document.querySelectorAll("h4").length < 12) {
+            counter - 1;
+            document.getElementById("guesses").innerHTML = counter;
+        }
         blanks = blanks + correctLetters[i] + " ";
     }
     document.getElementById("chosenName").innerHTML = blanks;
@@ -40,7 +47,6 @@ document.onkeyup = function () {
 }
 
 
-document.getElementById("guesses").innerHTML = counter;
 
 window.onload = createBlanks ()
 

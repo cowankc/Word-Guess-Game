@@ -12,6 +12,7 @@ let letterNum = wordlength;
 let blanks = [];
 let userChoice = "";
 let keysUsed = []
+let userGuess = ""
 
 
 let createBlanks = function() {
@@ -41,5 +42,9 @@ document.onkeyup = function typedKey() {
     }
     document.getElementById("chosenName").innerHTML = blanks;
     blanks = "";
+    if (userGuess = keysUsed) {
+        counter--
+    }
 }
+document.getElementById("guesses").innerHTML = counter;
 

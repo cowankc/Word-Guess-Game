@@ -1,84 +1,77 @@
 
-
+//variables and arrays
 const playerList = ["ray allen", "tim duncan", "lebron james", "michael jordan", "larry bird", "magic johnson", "wilt chamberlain", "dikembe mutombo", "kobe bryant", "Patrick Ewing", "charles barkley", "jerry west", "dirk nowitzki", "shaq", "dr.j", "karl malone", "steph curry", "yao ming", "david robinson", "bill russell"]
-let stop = false
-let compGuess = playerList[Math.floor(Math.random() * playerList.length)];
-let wordlength = compGuess.length;
-let correctLetters = [wordlength];
-let wordLetter = compGuess.split("");
-let counter = 10;
-let winCount = 0;
-let letterNum = wordlength;
-let blanks = [];
-let userChoice = "";
-let keysUsed = []
-let userGuess = ""
+const counter = 8; 
+let wins = 0;
+let stop = false; 
+let userChoice = []; 
+let chosenWord = []; 
+let compChoice; 
+let guess; 
 
+//resets variables and arrays back to original state 
+function restart() {
+    guess = counter
+    stop = false
+    userChoice = []
+    chosenWord = []
 
-// let createBlanks = function() {
-//     for(let i = 0; i < compGuess.length; i++) {
-//         correctLetters[i] = "_ "
-//         blanks = blanks + correctLetters[i];
-//     }
-//     document.getElementById("chosenName").innerHTML = blanks;
-// }
+    compChoice = playerList[Math.floor(Math.random() * playerList.length)].toLowerCase()
+    for (var i=0; i < compChoice.length; i++){
+        if (compChoice[i] === " ") {
+            chosenWord.push(" ")
+        } else {
+            chosenWord.push("_")
+        }
+    }
+    updateScore ()
+}
 
-window.onload = createBlanks ()
+// assign values to the scores
+function updateScore () {
+    document.getElementById("wins").innerText = wins
+    document.getElementById("chosenName").innerHTML = chosenWord.join(" ")
+    document.getElementById("guesses").innerText = guess
+    document.getElementById("usedletter").innerHTML =  userChoice.join("")
+}
 
-document.onkeypress = function(event) {
-    if (isAlpha(event.key) && !stop) {
+restart()
+
+document.onkeypress = function(event) { 
+    if (stop = true) {
         checkForLetter(event.key.toLowerCase())
     }
 }
 
+// Game loop 
 function checkForLetter(letter) {
-    let foundLetter = false
-    for (var i=0, j= correctLetters.length; i<j; i++) {
-        if (letter === wordLetter[i]) {
-            correctLetters[i] = letter
-            foundLetter = true
-            if (userChoice.join("") === wordLetter) {
-                wins++
-                pauseGame = true
-                updateDisplay()
-                setTimeout(resetGame,5000)
+    let correctLetter = false
+    for (var i=0; i<compChoice.length; i++) {
+        if (letter === compChoice[i]) {
+            chosenWord[i] = letter
+            correctLetter = true
+            if (chosenWord.join("") === compChoice) {
+                 wins++
+                 stop = true
+                 updateScore ()
+                setTimeout(restart,1000)
             }
         }
     }
+//checks if letter typed has already been used 
+if (!correctLetter) {
+    if (!userChoice.includes(letter)) {
+        userChoice.push(letter)
+        guess--
+    }
+    if (guess === 0) {
+        chosenWord = compChoice.split()
+        stop = true
+        setTimeout(restart, 1000)
+        alert("You missed that one!")
+    }
 }
 
+updateScore ()
 
-// document.onkeyup = function typedKey() {
-//     let userGuess = String.fromCharCode(event.keyCode).toLocaleLowerCase();
-//     let storedLetter = document.createElement("h4");
-//     storedLetter.innerHTML = userGuess;
-//     document.getElementById("usedletter").appendChild(storedLetter)
-//     keysUsed.push(userGuess);
-//     blanks = "";
-//     for (let i=0; i< correctLetters.length; i++) {
-//         if (userGuess === wordLetter[i]) {
-//             correctLetters[i] = userGuess;
-//             letterNum--;
-//         }
-        
-//         blanks = blanks + correctLetters[i] + " ";
-//     }
-//     document.getElementById("chosenName").innerHTML = blanks;
-//     blanks = "";
-    
-// }
-// document.getElementById("guesses").innerHTML = counter;
-
-// let counter1 = function () {
-//     if (userGuess !== compGuess) {
-//         counter--;
-//     }
-// }
-
-// let lose = function () {
-//     if (counter = 0) {
-//         alert("YOU LOSE");
-//     }
-// }
-
-
+}
